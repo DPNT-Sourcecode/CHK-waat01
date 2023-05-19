@@ -18,10 +18,15 @@ public class ChkTest {
 //        Integer solved4 = solution.checkout("a");
 //        Integer solved5 = solution.checkout("-");
 //        Integer solved6 = solution.checkout("ABCa");
-        Integer solved6 = solution.checkout("EE");
+        Integer solved6 = solution.checkout("EEE");
+        Integer solved = solution.checkout("AAA");
+        Integer solved1 = solution.checkout("AAAAA");
+        Integer solved2 = solution.checkout("AAAAAAAA");
+        Integer solved3 = solution.checkout("AAAAAAAAA");
 
         System.out.println();
 
     }
 }
+
 

@@ -37,15 +37,19 @@ public final class PricingRule implements Rule {
         if (rulesMap.isEmpty()) return total * originalPrice;
         if (rulesMap.size() == 1) return rulesMap.pollFirstEntry().getValue().solve(total, originalPrice);
 
+        int runningTotal = total;
+
         // Okay, so I need the
+        int sum = 0;
         for (Map.Entry<Integer, SubPricingRule> entry: rulesMap.entrySet()) {
-            // We know the count. I need to know how manytimes this count is satisfied.
-            // If its not satisfied, move to the next rule.
+            int ruleCount = entry.getKey();
+            int timesTotalGoesInto = runningTotal / ruleCount;
+            if (timesTotalGoesInto < 1) continue;
+
+            int totalToSolve = timesTotalGoesInto * ruleCount;
+            sum = entry.getValue().solve(totalToSolve, originalPrice);
+            runningTotal = runningTotal - totalToSolve;
         }
-
-        rulesMap.forEach((count, rulesMap) -> {
-
-        });
 
 
         return -1;
@@ -61,5 +65,6 @@ public final class PricingRule implements Rule {
 //        return promotional + (remaining * originalPrice);
     }
 }
+
 
 
