@@ -1,10 +1,9 @@
 package befaster.solutions.CHK;
 
-import befaster.runner.SolutionNotImplementedException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CheckoutSolution {
 
@@ -64,10 +63,21 @@ Where:
             skuCount.compute(String.valueOf(skus.charAt(i)), (k,  v) -> (v == null) ? 1 : v + 1);
         }
 
+
+        AtomicReference<Integer> sum = new AtomicReference<>(0);
+        skuCount.forEach((sku, count) -> {
+            if (checkout.containsKey(sku)) {
+                sum.set(sum.get() + checkout.get(sku) * count);
+            }
+        });
+
+        Integer calculated = sum.get();
+
         Optional<Integer> aCount = Optional.ofNullable(skuCount.remove("A"));
         Optional<Integer> bCount = Optional.ofNullable(skuCount.remove("B"));
 
         return -1;
     }
 }
+
 
