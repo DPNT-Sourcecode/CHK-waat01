@@ -58,12 +58,12 @@ Where:
         checkout.put("B", 30);
         checkout.put("C", 20);
         checkout.put("D", 15);
-        checkout.put("E", 15);
+        checkout.put("E", 40);
 
         final Map<String, Rule> rules = new HashMap<>();
         rules.put("A", PricingRule.create(5, 200, 3, 130));
         rules.put("B", PricingRule.singleton (2, 45));
-        rules.put("E", new BoGoRule(2, 45));
+        rules.put("E", new BoGoRule(2, 30));
 
         final Map<String, Integer> skuCount = new HashMap<>();
 
@@ -129,4 +129,5 @@ Where:
 //        }
 //    }
 }
+
 
