@@ -21,6 +21,7 @@ public class BoGoRule implements Rule {
         if (timesPromotionIsApplied > 0) {
             int timesSkuAppears = (int) codes.stream().filter( code -> code.equals(boGoSku.getCode())).count();
             if (timesSkuAppears > 0) {
+                int temp = boGoSku.caclulate(timesSkuAppears, codes);
                 currentSum = (currentSum - (timesSkuAppears * boGoSku.getCost()));
             }
         }
@@ -28,5 +29,6 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 

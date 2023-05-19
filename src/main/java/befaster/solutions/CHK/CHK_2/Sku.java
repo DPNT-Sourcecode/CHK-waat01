@@ -29,7 +29,8 @@ public class Sku {
     }
 
     public Sku setRule(Rule newRule) {
-        return new Sku(this.code, this.cost, newRule);
+        this.rule = newRule;
+        return this;
     }
 
     public int caclulate(int total, Collection<String> otherSkus) {
@@ -39,3 +40,4 @@ public class Sku {
         return total * cost;
     }
 }
+
