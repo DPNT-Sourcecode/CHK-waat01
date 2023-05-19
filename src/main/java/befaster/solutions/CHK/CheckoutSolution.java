@@ -40,6 +40,8 @@ Our price table and offers:
 +------+-------+------------------------+
 
 
+AABBCCDDEE
+
 Notes:
  - The policy of the supermarket is to always favor the customer when applying special offers.
  - All the offers are well balanced so that they can be safely combined.
@@ -95,5 +97,6 @@ Where:
         return sum.get();
     }
 }
+
 
 

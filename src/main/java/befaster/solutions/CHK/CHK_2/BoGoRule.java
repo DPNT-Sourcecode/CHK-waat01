@@ -20,15 +20,23 @@ public class BoGoRule implements Rule {
 
         if (timesPromotionIsApplied > 0) {
             int timesSkuAppears = (int) codes.stream().filter( code -> code.equals(boGoSku.getCode())).count();
-            if (timesSkuAppears > 0) {
+            if (timesSkuAppears > timesPromotionIsApplied) {
+                currentSum = currentSum - boGoSku.getCost();
+            }
+            if (timesSkuAppears == timesPromotionIsApplied) {
                 int temp = boGoSku.caclulate(timesSkuAppears, codes);
                 currentSum = (currentSum - (temp));
             }
+//            if (timesSkuAppears > 0) {
+//                int temp = boGoSku.caclulate(timesSkuAppears, codes);
+//                currentSum = (currentSum - (temp));
+//            }
         }
 
         return currentSum;
     }
 }
+
 
 
 
