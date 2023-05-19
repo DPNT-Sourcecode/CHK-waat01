@@ -28,4 +28,13 @@ public class ChkTest {
 
         System.out.println();
     }
+
+    @Test
+    void next() {
+        CheckoutSolution solution = new CheckoutSolution();
+
+        int thing = solution.checkout("ABCDEABCDE");
+        System.out.println();
+    }
 }
+
