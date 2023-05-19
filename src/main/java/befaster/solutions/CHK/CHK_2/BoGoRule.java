@@ -26,13 +26,22 @@ public class BoGoRule implements Rule {
         if (timesPromotionIsApplied > 0) {
             var totalCodesFound = (int) codes.stream().filter(code -> code.equals(boGoSku.getCode())).count();
             if (totalCodesFound > 0) {
+                var bogoRule = boGoSku.getRule();
+                var temp = 0;
+                if (bogoRule == null) {
+                    // There is no calculation. Return the times promotion is applied to the codes cost
+                    temp = (timesPromotionIsApplied * boGoSku.getCost());
+                }
                 // So we have a promotion and we have the total number of codes.
                 // No we need to simulate negation of the total cost.
-                if (boGoSku is SubPricingRule) {
-
+                else if (bogoRule instanceof SubPricingRule) {
+                    var tempRole = (SubPricingRule) bogoRule;
+                    
+                    temp = 0;
                 }
-
-                var temp = boGoSku.caclulate(totalCodesFound - timesPromotionIsApplied, codes);
+                else {
+                    temp = boGoSku.caclulate(totalCodesFound, codes);
+                }
                 currentSum = currentSum - temp;
             }
         }
@@ -40,6 +49,7 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 
 

@@ -16,6 +16,10 @@ class SubPricingRule implements Rule {
         return count;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     @Override
     public int solve(final int total, final int originalPrice, final Collection<String> codes) {
         int timesPromotionIsApplied = (total / count);
@@ -30,5 +34,3 @@ class SubPricingRule implements Rule {
         return promotional + (remaining * originalPrice);
     }
 }
-
-
