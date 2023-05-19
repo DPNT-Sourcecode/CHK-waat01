@@ -14,11 +14,14 @@ public class BoGoRule implements Rule {
     public int solve(int total, int originalPrice) {
         int timesPromotionIsApplied = (total / count);
 
-        if (timesPromotionIsApplied <= 0) {
-            return 0;
-        }
 
-        return (total * originalPrice) + timesPromotionIsApplied * boGoValue;
+        return total * originalPrice;
+//        if (timesPromotionIsApplied <= 0) {
+//            return total * originalPrice;
+//        }
+//
+//        return (total * originalPrice) + timesPromotionIsApplied * boGoValue;
     }
 }
+
 
