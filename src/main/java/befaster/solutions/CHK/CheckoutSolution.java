@@ -61,7 +61,7 @@ Where:
         final Map<String, Integer> skuCount = new HashMap<>();
 
         for (int i = 0; i < skus.length(); i++) {
-            skuCount.computeIfAbsent(skus)
+            skuCount.computeIfAbsent(String(skus.charAt(i)), (k) -> 1)
         }
 
 
@@ -72,5 +72,6 @@ Where:
         return -1;
     }
 }
+
 
 
