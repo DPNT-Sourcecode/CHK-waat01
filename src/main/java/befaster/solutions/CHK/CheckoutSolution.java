@@ -53,22 +53,22 @@ Where:
  - @return = an Integer representing the total checkout value of the items
 
      */
-    private static final Sku A = new Sku("A", 50);
-    private static final Sku B = new Sku("B", 30);
+    private static final Sku A = new Sku("A", 50, PricingRule.create(5, 200, 3, 130));
+    private static final Sku B = new Sku("B", 30, PricingRule.singleton (2, 45));
     private static final Sku C = new Sku("C", 20);
     private static final Sku D = new Sku("D", 15);
-    private static final Sku E = new Sku("E", 40);
+    private static final Sku E = new Sku("E", 40, new BoGoRule(2, B));
 
     public Integer checkout(String skus) {
         if (skus == null) return -1;
         if (skus.isEmpty()) return 0;
 
         final List<Sku> skuList = new ArrayList<>();
-        skuList.add(A.setRule(PricingRule.create(5, 200, 3, 130)));
-        skuList.add(B.setRule(PricingRule.singleton (2, 45)));
+        skuList.add(A);
+        skuList.add(B);
         skuList.add(C);
         skuList.add(D);
-        skuList.add(E.setRule(new BoGoRule(2, B)));
+        skuList.add(E);
 
 
         final Map<String, Sku> checkout = skuList.stream().collect(Collectors.toMap(Sku::getCode, Function.identity()));
@@ -95,4 +95,5 @@ Where:
         return sum.get();
     }
 }
+
 
