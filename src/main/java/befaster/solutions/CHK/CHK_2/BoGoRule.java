@@ -28,7 +28,10 @@ public class BoGoRule implements Rule {
             if (totalCodesFound > 0) {
                 // So we have a promotion and we have the total number of codes.
                 // No we need to simulate negation of the total cost.
-                var temp = boGoSku.caclulate(timesPromotionIsApplied, codes);
+                var count = (totalCodesFound > timesPromotionIsApplied) ?
+                    totalCodesFound - timesPromotionIsApplied : totalCodesFound;
+//                } else
+                var temp = boGoSku.caclulate(count, codes);
                 currentSum = currentSum - temp;
             }
         }
@@ -36,5 +39,6 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 
