@@ -2,10 +2,7 @@ package befaster.solutions.CHK;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static jdk.internal.net.http.SocketTube.listOf;
 
 public class CheckoutSolution {
 
@@ -57,8 +54,8 @@ Where:
         checkout.put("D", 15);
 
         final Map<String, Rule> rules = new HashMap<>();
-        rules.put("A", new Rule("A", 3, 130));
-        rules.put("B", new Rule("B", 2, 45));
+        rules.put("A", new Rule(3, 130));
+        rules.put("B", new Rule(2, 45));
 
         final Map<String, Integer> skuCount = new HashMap<>();
 
@@ -85,25 +82,32 @@ Where:
 
     class Rule {
 
-        private final String sku;
         private final Integer count;
         private final Integer price;
 
-        public Rule(final String sku, final Integer count, final Integer price) {
-            this.sku = sku;
+        public Rule(final Integer count, final Integer price) {
             this.count = count;
             this.price = price;
         }
 
-        public Integer getCost(final Integer total, final Integer originalPrice) {
+        public int getCost(final Integer total, final Integer originalPrice) {
             // I need to know how many times this promotion is counted.
             // Add the remaining number by the original price
 
-            
-            return -1;
+            int timesPromotionIsApplied = (total / count);
+
+            if (timesPromotionIsApplied <= 0) {
+                return total * originalPrice;
+            }
+
+            int promotional = timesPromotionIsApplied * price;
+            int remaining = total - (count * timesPromotionIsApplied);
+
+            return promotional + (remaining * originalPrice);
         }
     }
 }
+
 
 
 
