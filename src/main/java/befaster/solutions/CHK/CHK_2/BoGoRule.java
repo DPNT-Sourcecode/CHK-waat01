@@ -23,12 +23,12 @@ public class BoGoRule implements Rule {
         // The promotion is applied once, meaning the promotion is invalidated moving forward for B (in this case)
         if (timesPromotionIsApplied > 0) {
             int timesSkuAppears = 0;
-            for (int i = 0; i < timesPromotionIsApplied; i++) {
-                while (codes.hasNext()) {
-                    if (codes.next().equals(boGoSku.getCode())) {
-                        codes.remove();
-                        timesSkuAppears = timesSkuAppears + 1;
-                    }
+
+            while (codes.hasNext() && timesPromotionIsApplied > 0) {
+                if (codes.next().equals(boGoSku.getCode())) {
+                    codes.remove();
+                    timesPromotionIsApplied = timesPromotionIsApplied - 1;
+                    timesSkuAppears = timesSkuAppears + 1;
                 }
             }
 
@@ -48,6 +48,7 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 
 
