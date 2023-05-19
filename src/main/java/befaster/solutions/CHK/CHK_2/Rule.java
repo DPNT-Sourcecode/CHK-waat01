@@ -4,4 +4,3 @@ public interface Rule {
 
     int solve(final int total, final int originalPrice);
 }
-

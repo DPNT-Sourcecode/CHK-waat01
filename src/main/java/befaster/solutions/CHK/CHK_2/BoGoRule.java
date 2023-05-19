@@ -15,4 +15,3 @@ public class BoGoRule implements Rule {
         return -1;
     }
 }
-

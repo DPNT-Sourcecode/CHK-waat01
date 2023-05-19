@@ -1,8 +1,10 @@
 package befaster.solutions.CHK;
 
+import befaster.solutions.CHK.CHK_2.BoGoRule;
 import befaster.solutions.CHK.CHK_2.PricingRule;
 import befaster.solutions.CHK.CHK_2.Rule;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -59,9 +61,9 @@ Where:
         checkout.put("E", 15);
 
         final Map<String, Rule> rules = new HashMap<>();
-        rules.put("A", new Rule(3, 130));
-        rules.put("B", new PricingRule(2, 45));
-        rules.put("E", new Rule(2, 45));
+        rules.put("A", PricingRule.create(5, 200, 3, 130));
+        rules.put("B", PricingRule.singleton (2, 45));
+        rules.put("E", new BoGoRule(2, 45));
 
         final Map<String, Integer> skuCount = new HashMap<>();
 
@@ -127,5 +129,3 @@ Where:
 //        }
 //    }
 }
-
-
