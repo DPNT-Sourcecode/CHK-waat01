@@ -1,5 +1,8 @@
 package befaster.solutions.CHK.CHK_2;
 
+import java.util.Collection;
+import java.util.Set;
+
 public class Sku {
     private final String code;
     private final int cost;
@@ -29,11 +32,10 @@ public class Sku {
         return new Sku(this.code, this.cost, newRule);
     }
 
-    public int caclulate(int total) {
+    public int caclulate(int total, Collection<String> otherSkus) {
         if (rule != null) {
-            return rule.solve(total, cost);
+            return rule.solve(total, cost, otherSkus);
         }
         return total * cost;
     }
 }
-

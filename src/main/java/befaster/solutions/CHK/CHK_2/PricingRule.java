@@ -32,10 +32,11 @@ public final class PricingRule implements Rule {
         return new PricingRule(rules);
     }
 
+
     @Override
-    public int solve(int total, int originalPrice) {
+    public int solve(int total, int originalPrice, Collection<String> codes) {
         if (rulesMap.isEmpty()) return total * originalPrice;
-        if (rulesMap.size() == 1) return rulesMap.pollFirstEntry().getValue().solve(total, originalPrice);
+        if (rulesMap.size() == 1) return rulesMap.pollFirstEntry().getValue().solve(total, originalPrice, codes);
 
         int runningTotal = total;
         int sum = 0;
@@ -45,7 +46,7 @@ public final class PricingRule implements Rule {
             if (timesTotalGoesInto < 1) continue;
 
             int totalToSolve = timesTotalGoesInto * ruleCount;
-            sum = sum + entry.getValue().solve(totalToSolve, originalPrice);
+            sum = sum + entry.getValue().solve(totalToSolve, originalPrice, codes);
             runningTotal = runningTotal - totalToSolve;
         }
 

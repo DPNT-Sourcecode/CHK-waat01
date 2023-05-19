@@ -1,31 +1,30 @@
 package befaster.solutions.CHK.CHK_2;
 
+import java.util.Collection;
+
 public class BoGoRule implements Rule {
 
     private final int count;
-    private final int boGoValue;
-
     private final Sku boGoSku;
-
-    public BoGoRule(final int count, final int boGoValue) {
-        this.count = count;
-        this.boGoValue = boGoValue;
-        this.boGoSku = null;
-    }
 
     public BoGoRule(final int count, final Sku boGoSku) {
         this.count = count;
         this.boGoSku = boGoSku;
-        this.boGoValue = boGoSku.getCost();
     }
 
 
     @Override
-    public int solve(int total, int originalPrice) {
+    public int solve(int total, int originalPrice, Collection<String> codes) {
+        int currentSum = total * originalPrice;
         int timesPromotionIsApplied = (total / count);
 
+        if (timesPromotionIsApplied > 0) {
+            int timesSkuAppears = (int) codes.stream().filter( code -> code.equals(boGoSku.getCode())).count();
+            if (timesSkuAppears > 0) {
+                currentSum = (currentSum - (timesSkuAppears * boGoSku.getCost()));
+            }
+        }
 
-        return total * originalPrice;
+        return currentSum;
     }
 }
-

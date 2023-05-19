@@ -25,9 +25,7 @@ public class ChkTest {
         assertEquals(80, solvedEEB);
         assertEquals(120, solvedEEEB);
         assertEquals(160, solvedEEEEBB);
-        
+
         System.out.println();
     }
 }
-
-

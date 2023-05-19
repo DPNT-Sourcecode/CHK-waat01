@@ -87,56 +87,9 @@ Where:
             if (checkout.containsKey(code)) {
                 Sku sku = checkout.get(code);
                 sum.set(sum.get() + sku.caclulate(count));
-
-//                if (rules.containsKey(sku)) {
-//                    Integer priceForOne = checkout.get(sku);
-//                    Rule rule = rules.get(sku);
-//                    sum.set(sum.get() + rule.solve(count, priceForOne));
-//                }
-//                else {
-//                    sum.set(sum.get() + checkout.get(sku) * count);
-//                }
             }
         });
 
         return sum.get();
     }
-
-//    class Rule {
-//
-//        private final Integer count;
-//        private final Integer price;
-//
-//        public Rule(final Integer count, final Integer price) {
-//            this.count = count;
-//            this.price = price;
-//        }
-//
-//        public int getCost(final Integer total, final Integer originalPrice) {
-//            // I need to know how many times this promotion is counted.
-//            // Add the remaining number by the original price
-//
-//            int timesPromotionIsApplied = (total / count);
-//
-//            if (timesPromotionIsApplied <= 0) {
-//                return total * originalPrice;
-//            }
-//
-//            int promotional = timesPromotionIsApplied * price;
-//            int remaining = total - (count * timesPromotionIsApplied);
-//
-//            return promotional + (remaining * originalPrice);
-//        }
-//    }
-//
-//    class SubRule {
-//        private final Integer count;
-//        private final Integer price;
-//
-//        public SubRule(final Integer count, final Integer price) {
-//            this.count = count;
-//            this.price = price;
-//        }
-//    }
 }
-
