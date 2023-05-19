@@ -8,6 +8,7 @@ import befaster.solutions.CHK.CHK_2.Sku;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,39 +75,34 @@ Where:
         skuList.add(E);
 
 
-        final Map<String, Sku> checkout = skuList.stream().collect(Collectors.toMap(Sku::getCode, Function.identity()));
+        final Map<String, Sku> checkoutDictionary = skuList.stream().collect(Collectors.toMap(Sku::getCode, Function.identity()));
 
         final List<String> allSkus = new ArrayList<>();
-        final Map<String, Integer> skuCount = new HashMap<>();
+        final Map<String, Integer> skuDictionaryByCount = new HashMap<>();
         for (int i = 0; i < skus.length(); i++) {
             String singleSku = String.valueOf(skus.charAt(i));
             allSkus.add(singleSku);
-            if (checkout.containsKey(singleSku)) {
-                skuCount.compute(singleSku, (k,  v) -> (v == null) ? 1 : v + 1);
+            if (checkoutDictionary.containsKey(singleSku)) {
+                skuDictionaryByCount.compute(singleSku, (k,  v) -> (v == null) ? 1 : v + 1);
             }
             else return -1;
         }
 
-        AtomicReference<Integer> sum = new AtomicReference<>(0);
-        var skuIterator = skuCount.entrySet().iterator();
+        var ordered = checkoutDictionary.values()
+                .stream()
+                .sorted(Comparator.comparing(Sku::getPriority))
+                .map(Sku::getCode)
+                .toList();
 
-        while (skuIterator.hasNext()) {
-            var skuEntry = skuIterator.next();
-            var code = skuEntry.getKey();
-            if (checkout.containsKey(code)) {
-                Sku sku = checkout.get(code);
-                sum.set(sum.get() + sku.caclulate(skuEntry.getValue(), allSkus));
+        var sum = 0;
+        for (String code : ordered) {
+            var sku = checkoutDictionary.get(code);
+            if (skuDictionaryByCount.containsKey(code)) {
+                var total = skuDictionaryByCount.get(code);
+                sum = sum + sku.caclulate(total, () -> skuDictionaryByCount);
             }
         }
-//        skuCount.forEach((code, count) -> {
-//            if (checkout.containsKey(code)) {
-//                Sku sku = checkout.get(code);
-//                sum.set(sum.get() + sku.caclulate(count, allSkus.iterator()));
-//            }
-//        });
 
-        return sum.get();
+        return sum;
     }
 }
-
-

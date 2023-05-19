@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Supplier;
 
 public final class PricingRule implements Rule {
     private final TreeMap<Integer, SinglePricingRule> rulesMap = new TreeMap<>(Comparator.reverseOrder());
@@ -34,9 +36,14 @@ public final class PricingRule implements Rule {
 
 
     @Override
-    public int solve(final int total, final int originalPrice, final Collection<String> codes) {
+    public int priority() {
+        return 10;
+    }
+
+    @Override
+    public int solve(final int total, final int originalPrice, Supplier<Map<String, Integer>> skusByCount) {
         if (rulesMap.isEmpty()) return total * originalPrice;
-        if (rulesMap.size() == 1) return rulesMap.firstEntry().getValue().solve(total, originalPrice, codes);
+        if (rulesMap.size() == 1) return rulesMap.firstEntry().getValue().solve(total, originalPrice, skusByCount);
 
         int runningTotal = total;
         int sum = 0;
@@ -46,7 +53,7 @@ public final class PricingRule implements Rule {
             if (timesTotalGoesInto < 1) continue;
 
             int totalToSolve = timesTotalGoesInto * ruleCount;
-            sum = sum + entry.getValue().solve(totalToSolve, originalPrice, codes);
+            sum = sum + entry.getValue().solve(totalToSolve, originalPrice, skusByCount);
             runningTotal = runningTotal - totalToSolve;
         }
 
@@ -57,6 +64,3 @@ public final class PricingRule implements Rule {
         return sum;
     }
 }
-
-
-
