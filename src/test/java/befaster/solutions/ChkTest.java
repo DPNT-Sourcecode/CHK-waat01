@@ -15,10 +15,14 @@ public class ChkTest {
 //        Integer solved1 = solution.checkout(sku1);
 //        Integer solved2 = solution.checkout(sku2);
         Integer solved3 = solution.checkout(sku3);
+        Integer solved4 = solution.checkout("a");
+        Integer solved5 = solution.checkout("-");
+        Integer solved6 = solution.checkout("ABCa");
 
         System.out.println();
 
     }
 }
+
 
 

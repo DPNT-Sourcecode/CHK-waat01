@@ -60,7 +60,11 @@ Where:
         final Map<String, Integer> skuCount = new HashMap<>();
 
         for (int i = 0; i < skus.length(); i++) {
-            skuCount.compute(String.valueOf(skus.charAt(i)), (k,  v) -> (v == null) ? 1 : v + 1);
+            String singleSku = String.valueOf(skus.charAt(i));
+            if (checkout.containsKey(singleSku)) {
+                skuCount.compute(singleSku, (k,  v) -> (v == null) ? 1 : v + 1);
+            }
+            else return -1;
         }
 
         AtomicReference<Integer> sum = new AtomicReference<>(0);
@@ -107,6 +111,7 @@ Where:
         }
     }
 }
+
 
 
 
