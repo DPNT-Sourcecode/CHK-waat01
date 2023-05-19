@@ -34,7 +34,8 @@ public class BoGoRule implements Rule {
                 else if (bogoRule instanceof SinglePricingRule) {
                     var tempRole = (SinglePricingRule) bogoRule;
                     var additional = totalCodesFound - timesPromotionIsApplied;
-                    temp = boGoSku.caclulate(totalCodesFound, codes) + (additional * tempRole.price());
+
+//                    temp = boGoSku.caclulate(totalCodesFound, codes) + (additional * tempRole.price());
                 }
                 else {
                     temp = boGoSku.caclulate(totalCodesFound, codes);
@@ -46,6 +47,7 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 
 
