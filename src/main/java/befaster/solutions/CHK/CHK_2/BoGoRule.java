@@ -24,10 +24,17 @@ public class BoGoRule implements Rule {
         // We have 2 E's and 2 B's.
         // The promotion is applied once, meaning the promotion is invalidated moving forward for B (in this case)
         if (timesPromotionIsApplied > 0) {
-
+            var totalCodesFound = (int) codes.stream().filter(code -> code.equals(boGoSku.getCode())).count();
+            if (totalCodesFound > 0) {
+                // So we have a promotion and we have the total number of codes.
+                // No we need to simulate negation of the total cost.
+                var temp = boGoSku.caclulate(timesPromotionIsApplied, codes);
+                currentSum = currentSum - temp;
+            }
         }
 
         return currentSum;
     }
 }
+
 
