@@ -90,10 +90,11 @@ Where:
         skuCount.forEach((code, count) -> {
             if (checkout.containsKey(code)) {
                 Sku sku = checkout.get(code);
-                sum.set(sum.get() + sku.caclulate(count, allSkus));
+                sum.set(sum.get() + sku.caclulate(count, allSkus.iterator()));
             }
         });
 
         return sum.get();
     }
 }
+

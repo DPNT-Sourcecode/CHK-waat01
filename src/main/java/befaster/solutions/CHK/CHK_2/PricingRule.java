@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -34,7 +35,7 @@ public final class PricingRule implements Rule {
 
 
     @Override
-    public int solve(int total, int originalPrice, Collection<String> codes) {
+    public int solve(int total, int originalPrice, Iterator<String> codes) {
         if (rulesMap.isEmpty()) return total * originalPrice;
         if (rulesMap.size() == 1) return rulesMap.firstEntry().getValue().solve(total, originalPrice, codes);
 
@@ -57,3 +58,4 @@ public final class PricingRule implements Rule {
         return sum;
     }
 }
+

@@ -1,6 +1,7 @@
 package befaster.solutions.CHK.CHK_2;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 class SubPricingRule implements Rule {
 
@@ -17,7 +18,7 @@ class SubPricingRule implements Rule {
     }
 
     @Override
-    public int solve(int total, int originalPrice, Collection<String> codes) {
+    public int solve(int total, int originalPrice, Iterator<String> codes) {
         int timesPromotionIsApplied = (total / count);
 
         if (timesPromotionIsApplied <= 0) {
@@ -30,3 +31,4 @@ class SubPricingRule implements Rule {
         return promotional + (remaining * originalPrice);
     }
 }
+
