@@ -3,11 +3,16 @@ package befaster.solutions.CHK;
 import befaster.solutions.CHK.CHK_2.BoGoRule;
 import befaster.solutions.CHK.CHK_2.PricingRule;
 import befaster.solutions.CHK.CHK_2.Rule;
+import befaster.solutions.CHK.CHK_2.Sku;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CheckoutSolution {
 
@@ -48,25 +53,27 @@ Where:
  - @return = an Integer representing the total checkout value of the items
 
      */
+    private static final Sku A = new Sku("A", 50);
+    private static final Sku B = new Sku("B", 30);
+    private static final Sku C = new Sku("C", 20);
+    private static final Sku D = new Sku("D", 15);
+    private static final Sku E = new Sku("E", 40);
 
     public Integer checkout(String skus) {
         if (skus == null) return -1;
         if (skus.isEmpty()) return 0;
 
-        final Map<String, Integer> checkout = new HashMap<>();
-        checkout.put("A", 50);
-        checkout.put("B", 30);
-        checkout.put("C", 20);
-        checkout.put("D", 15);
-        checkout.put("E", 40);
+        final List<Sku> skuList = new ArrayList<>();
+        skuList.add(A.setRule(PricingRule.create(5, 200, 3, 130)));
+        skuList.add(B.setRule(PricingRule.singleton (2, 45)));
+        skuList.add(C);
+        skuList.add(D);
+        skuList.add(E.setRule(new BoGoRule(2, B)));
 
-        final Map<String, Rule> rules = new HashMap<>();
-        rules.put("A", PricingRule.create(5, 200, 3, 130));
-        rules.put("B", PricingRule.singleton (2, 45));
-        rules.put("E", new BoGoRule(2, 30));
+
+        final Map<String, Sku> checkout = skuList.stream().collect(Collectors.toMap(Sku::getCode, Function.identity()));
 
         final Map<String, Integer> skuCount = new HashMap<>();
-
         for (int i = 0; i < skus.length(); i++) {
             String singleSku = String.valueOf(skus.charAt(i));
             if (checkout.containsKey(singleSku)) {
@@ -76,16 +83,19 @@ Where:
         }
 
         AtomicReference<Integer> sum = new AtomicReference<>(0);
-        skuCount.forEach((sku, count) -> {
-            if (checkout.containsKey(sku)) {
-                if (rules.containsKey(sku)) {
-                    Integer priceForOne = checkout.get(sku);
-                    Rule rule = rules.get(sku);
-                    sum.set(sum.get() + rule.solve(count, priceForOne));
-                }
-                else {
-                    sum.set(sum.get() + checkout.get(sku) * count);
-                }
+        skuCount.forEach((code, count) -> {
+            if (checkout.containsKey(code)) {
+                Sku sku = checkout.get(code);
+                sum.set(sum.get() + sku.caclulate(count));
+
+//                if (rules.containsKey(sku)) {
+//                    Integer priceForOne = checkout.get(sku);
+//                    Rule rule = rules.get(sku);
+//                    sum.set(sum.get() + rule.solve(count, priceForOne));
+//                }
+//                else {
+//                    sum.set(sum.get() + checkout.get(sku) * count);
+//                }
             }
         });
 
@@ -129,3 +139,4 @@ Where:
 //        }
 //    }
 }
+
