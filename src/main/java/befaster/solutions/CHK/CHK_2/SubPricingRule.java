@@ -1,8 +1,6 @@
 package befaster.solutions.CHK.CHK_2;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
 
 class SubPricingRule implements Rule {
 
@@ -32,4 +30,5 @@ class SubPricingRule implements Rule {
         return promotional + (remaining * originalPrice);
     }
 }
+
 
