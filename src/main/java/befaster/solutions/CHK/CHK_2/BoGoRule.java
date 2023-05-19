@@ -22,26 +22,33 @@ public class BoGoRule implements Rule {
         // We have 2 E's and 2 B's.
         // The promotion is applied once, meaning the promotion is invalidated moving forward for B (in this case)
         if (timesPromotionIsApplied > 0) {
-            AtomicInteger timesSkuAppears = new AtomicInteger();
-            codes.forEachRemaining(code -> {
-                if (code.equals(boGoSku.getCode())) timesSkuAppears.set(timesSkuAppears.get() + 1);
-            });
-
-            int temp = boGoSku.caclulate(timesSkuAppears.get(), codes);
-            // The sku appears 3 times and the promotion is only applied once.
-            if (timesSkuAppears.get() > timesPromotionIsApplied) {
-
-                currentSum = currentSum - (temp);
+            int timesSkuAppears = 0;
+            for (int i = 0; i < timesPromotionIsApplied; i++) {
+                while (codes.hasNext()) {
+                    if (codes.next().equals(boGoSku.getCode())) {
+                        codes.remove();
+                        timesSkuAppears = timesSkuAppears + 1;
+                    }
+                }
             }
-            if (timesSkuAppears.get() == timesPromotionIsApplied) {
-//                int temp = boGoSku.caclulate(timesSkuAppears, codes);
-                currentSum = (currentSum - (temp));
-            }
+
+
+//            int temp = boGoSku.caclulate(timesSkuAppears, codes);
+//
+//            if (timesSkuAppears > timesPromotionIsApplied) {
+//
+//                currentSum = currentSum - (temp);
+//            }
+//            if (timesSkuAppears == timesPromotionIsApplied) {
+////                int temp = boGoSku.caclulate(timesSkuAppears, codes);
+//                currentSum = (currentSum - (temp));
+//            }
         }
 
         return currentSum;
     }
 }
+
 
 
 
