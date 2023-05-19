@@ -12,12 +12,13 @@ public class ChkTest {
         String sku3 = "AAAAAAABB";
         CheckoutSolution solution = new CheckoutSolution();
 
-        Integer solved1 = solution.checkout(sku1);
-        Integer solved2 = solution.checkout(sku2);
+//        Integer solved1 = solution.checkout(sku1);
+//        Integer solved2 = solution.checkout(sku2);
         Integer solved3 = solution.checkout(sku3);
 
         System.out.println();
 
     }
 }
+
 
