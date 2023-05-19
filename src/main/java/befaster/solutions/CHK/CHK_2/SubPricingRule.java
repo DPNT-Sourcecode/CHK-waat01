@@ -19,7 +19,7 @@ class SubPricingRule implements Rule {
     }
 
     @Override
-    public int solve(int total, int originalPrice, Iterator<Map.Entry<String, Integer>> codes) {
+    public int solve(final int total, final int originalPrice, final Collection<String> codes) {
         int timesPromotionIsApplied = (total / count);
 
         if (timesPromotionIsApplied <= 0) {
@@ -32,3 +32,4 @@ class SubPricingRule implements Rule {
         return promotional + (remaining * originalPrice);
     }
 }
+

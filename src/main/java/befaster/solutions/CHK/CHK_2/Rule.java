@@ -6,5 +6,6 @@ import java.util.Map;
 
 public interface Rule {
 
-    int solve(final int total, final int originalPrice, final Iterator<Map.Entry<String, Integer>> codes);
+    int solve(final int total, final int originalPrice, final Collection<String> codes);
 }
+

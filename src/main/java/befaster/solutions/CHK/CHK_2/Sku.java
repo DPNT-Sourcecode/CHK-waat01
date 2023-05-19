@@ -35,10 +35,11 @@ public class Sku {
         return this;
     }
 
-    public int caclulate(int total, Iterator<Map.Entry<String, Integer>> otherSkus) {
+    public int caclulate(int total, Collection<String> otherSkus) {
         if (rule != null) {
             return rule.solve(total, cost, otherSkus);
         }
         return total * cost;
     }
 }
+

@@ -94,7 +94,7 @@ Where:
             var code = skuEntry.getKey();
             if (checkout.containsKey(code)) {
                 Sku sku = checkout.get(code);
-                sum.set(sum.get() + sku.caclulate(skuEntry.getValue(), skuIterator));
+                sum.set(sum.get() + sku.caclulate(skuEntry.getValue(), allSkus));
             }
         }
 //        skuCount.forEach((code, count) -> {
@@ -107,3 +107,4 @@ Where:
         return sum.get();
     }
 }
+
