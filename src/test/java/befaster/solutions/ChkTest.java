@@ -39,7 +39,9 @@ public class ChkTest {
 
         assertEquals(280, solutionABCDEABCDE);
 //        assertEquals(280, solutionCCADDEEBBA);
+//        assertEquals(455, solutionAAAAAEEBAAABB);
         System.out.println();
     }
 }
+
 

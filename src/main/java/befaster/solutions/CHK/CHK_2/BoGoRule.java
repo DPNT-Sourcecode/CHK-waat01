@@ -27,7 +27,7 @@ public class BoGoRule implements Rule {
             // The sku appears 3 times and the promotion is only applied once.
             if (timesSkuAppears > timesPromotionIsApplied) {
 
-                currentSum = currentSum - (temp * timesPromotionIsApplied);
+                currentSum = currentSum - (temp);
             }
             if (timesSkuAppears == timesPromotionIsApplied) {
 //                int temp = boGoSku.caclulate(timesSkuAppears, codes);
@@ -38,4 +38,5 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
