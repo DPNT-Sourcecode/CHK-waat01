@@ -27,6 +27,10 @@ public class Sku {
         return cost;
     }
 
+    public Rule getRule() {
+        return rule;
+    }
+
     public Sku setRule(Rule newRule) {
         this.rule = newRule;
         return this;
@@ -39,5 +43,6 @@ public class Sku {
         return total * cost;
     }
 }
+
 
 
