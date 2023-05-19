@@ -38,8 +38,6 @@ public final class PricingRule implements Rule {
         if (rulesMap.size() == 1) return rulesMap.pollFirstEntry().getValue().solve(total, originalPrice);
 
         int runningTotal = total;
-
-        // Okay, so I need the
         int sum = 0;
         for (Map.Entry<Integer, SubPricingRule> entry: rulesMap.entrySet()) {
             int ruleCount = entry.getKey();
@@ -47,24 +45,18 @@ public final class PricingRule implements Rule {
             if (timesTotalGoesInto < 1) continue;
 
             int totalToSolve = timesTotalGoesInto * ruleCount;
-            sum = entry.getValue().solve(totalToSolve, originalPrice);
+            sum = sum + entry.getValue().solve(totalToSolve, originalPrice);
             runningTotal = runningTotal - totalToSolve;
         }
 
+        if (runningTotal > 0) {
+            sum = sum + (runningTotal * originalPrice);
+        }
 
-        return -1;
-//        int timesPromotionIsApplied = (total / count);
-//
-//        if (timesPromotionIsApplied <= 0) {
-//            return total * originalPrice;
-//        }
-//
-//        int promotional = timesPromotionIsApplied * price;
-//        int remaining = total - (count * timesPromotionIsApplied);
-//
-//        return promotional + (remaining * originalPrice);
+        return sum;
     }
 }
+
 
 
 
