@@ -23,5 +23,3 @@ public class BoGoRule implements Rule {
 //        return (total * originalPrice) + timesPromotionIsApplied * boGoValue;
     }
 }
-
-
