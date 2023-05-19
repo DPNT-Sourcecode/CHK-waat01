@@ -22,13 +22,14 @@ public class BoGoRule implements Rule {
             int timesSkuAppears = (int) codes.stream().filter( code -> code.equals(boGoSku.getCode())).count();
             if (timesSkuAppears > 0) {
                 int temp = boGoSku.caclulate(timesSkuAppears, codes);
-                currentSum = (currentSum - (timesSkuAppears * boGoSku.getCost()));
+                currentSum = (currentSum - (temp));
             }
         }
 
         return currentSum;
     }
 }
+
 
 
 

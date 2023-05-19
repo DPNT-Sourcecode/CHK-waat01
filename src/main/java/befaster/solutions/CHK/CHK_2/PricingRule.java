@@ -36,7 +36,7 @@ public final class PricingRule implements Rule {
     @Override
     public int solve(int total, int originalPrice, Collection<String> codes) {
         if (rulesMap.isEmpty()) return total * originalPrice;
-        if (rulesMap.size() == 1) return rulesMap.pollFirstEntry().getValue().solve(total, originalPrice, codes);
+        if (rulesMap.size() == 1) return rulesMap.firstEntry().getValue().solve(total, originalPrice, codes);
 
         int runningTotal = total;
         int sum = 0;
@@ -57,3 +57,4 @@ public final class PricingRule implements Rule {
         return sum;
     }
 }
+
