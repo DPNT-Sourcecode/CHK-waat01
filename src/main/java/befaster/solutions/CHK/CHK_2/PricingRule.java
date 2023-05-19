@@ -35,7 +35,7 @@ public final class PricingRule implements Rule {
 
 
     @Override
-    public int solve(int total, int originalPrice, Iterator<String> codes) {
+    public int solve(int total, int originalPrice, Iterator<Map.Entry<String, Integer>> codes) {
         if (rulesMap.isEmpty()) return total * originalPrice;
         if (rulesMap.size() == 1) return rulesMap.firstEntry().getValue().solve(total, originalPrice, codes);
 
@@ -58,4 +58,5 @@ public final class PricingRule implements Rule {
         return sum;
     }
 }
+
 

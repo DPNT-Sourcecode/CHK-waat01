@@ -87,14 +87,25 @@ Where:
         }
 
         AtomicReference<Integer> sum = new AtomicReference<>(0);
-        skuCount.forEach((code, count) -> {
+        var skuIterator = skuCount.entrySet().iterator();
+
+        while (skuIterator.hasNext()) {
+            var skuEntry = skuIterator.next();
+            var code = skuEntry.getKey();
             if (checkout.containsKey(code)) {
                 Sku sku = checkout.get(code);
-                sum.set(sum.get() + sku.caclulate(count, allSkus.iterator()));
+                sum.set(sum.get() + sku.caclulate(skuEntry.getValue(), skuIterator));
             }
-        });
+        }
+//        skuCount.forEach((code, count) -> {
+//            if (checkout.containsKey(code)) {
+//                Sku sku = checkout.get(code);
+//                sum.set(sum.get() + sku.caclulate(count, allSkus.iterator()));
+//            }
+//        });
 
         return sum.get();
     }
 }
+
 

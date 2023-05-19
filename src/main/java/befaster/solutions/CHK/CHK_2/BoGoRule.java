@@ -1,6 +1,7 @@
 package befaster.solutions.CHK.CHK_2;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BoGoRule implements Rule {
@@ -15,7 +16,7 @@ public class BoGoRule implements Rule {
 
 
     @Override
-    public int solve(int total, int originalPrice, Iterator<String> codes) {
+    public int solve(int total, int originalPrice, Iterator<Map.Entry<String, Integer>> codes) {
         int currentSum = total * originalPrice;
         int timesPromotionIsApplied = (total / count);
 
@@ -24,16 +25,20 @@ public class BoGoRule implements Rule {
         if (timesPromotionIsApplied > 0) {
             int timesSkuAppears = 0;
 
-            while (codes.hasNext() && timesPromotionIsApplied > 0) {
-                if (codes.next().equals(boGoSku.getCode())) {
-                    codes.remove();
-                    timesPromotionIsApplied = timesPromotionIsApplied - 1;
-                    timesSkuAppears = timesSkuAppears + 1;
-                }
+//            while (codes.hasNext()) {
+//                var entry = codes.next();
+//                if (entry.getKey().equals(boGoSku.getCode())) {
+//                    var totalInstances = entry.getValue();
+//                    if (timesPromotionIsApplied > totalInstances) {
+//                        codes.remove();
+//                    } else {
+//                        entry.setValue(totalInstances - timesPromotionIsApplied);
+//                    }
+//                }
             }
 
-            int temp = boGoSku.caclulate(timesSkuAppears, codes);
-            currentSum = currentSum - (temp);
+//            int temp = boGoSku.caclulate(timesSkuAppears, codes);
+//            currentSum = currentSum - (temp);
 //
 //
 //            if (timesSkuAppears > timesPromotionIsApplied) {
@@ -49,6 +54,7 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 
 
