@@ -25,8 +25,13 @@ public class BoGNSelfRule extends BoGNRule {
             currentSum = calculation.total() * calculation.originalPrice();
             int timesPromotionIsApplied = (calculation.total() / getCount()) * getN();
 
-            currentSum = currentSum - (timesPromotionIsApplied * calculation.originalPrice());
+//            int other = ;
+
+            if (calculation.total() % getCount() > 0) {
+                currentSum = currentSum - (timesPromotionIsApplied * calculation.originalPrice());
+            }
         }
         return currentSum;
     }
 }
+
