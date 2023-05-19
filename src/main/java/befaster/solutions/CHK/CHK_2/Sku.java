@@ -40,4 +40,3 @@ public class Sku {
         return total * cost;
     }
 }
-

@@ -57,4 +57,3 @@ public final class PricingRule implements Rule {
         return sum;
     }
 }
-

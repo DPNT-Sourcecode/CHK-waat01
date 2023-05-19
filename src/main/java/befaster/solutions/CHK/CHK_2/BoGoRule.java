@@ -21,6 +21,8 @@ public class BoGoRule implements Rule {
         if (timesPromotionIsApplied > 0) {
             int timesSkuAppears = (int) codes.stream().filter( code -> code.equals(boGoSku.getCode())).count();
             if (timesSkuAppears > timesPromotionIsApplied) {
+                // We have 2 E's and 2 B's.
+                // The promotion is applied once, meaning the promotion is invalidated moving forward for B (in this case)
                 currentSum = currentSum - boGoSku.getCost();
             }
             if (timesSkuAppears == timesPromotionIsApplied) {
@@ -36,8 +38,3 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
-
-
-
-
-

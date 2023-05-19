@@ -97,6 +97,3 @@ Where:
         return sum.get();
     }
 }
-
-
-
