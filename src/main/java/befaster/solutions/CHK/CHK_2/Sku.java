@@ -45,7 +45,7 @@ public class Sku {
 
     public int caclulate(int total, Supplier<Map<String, Integer>> skusByCount) {
         if (rule != null) {
-            return rule.solve(total, cost, skusByCount);
+            return rule.solve(new SkuCalculation(code, total, cost), skusByCount);
         }
         return total * cost;
     }

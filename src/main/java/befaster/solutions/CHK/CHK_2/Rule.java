@@ -9,5 +9,5 @@ public interface Rule {
 
     int priority();
 
-    int solve(final int total, final int originalPrice, final Supplier<Map<String, Integer>> skusByCount);
+    int solve(SkuCalculation calculation, final Supplier<Map<String, Integer>> skusByCount);
 }

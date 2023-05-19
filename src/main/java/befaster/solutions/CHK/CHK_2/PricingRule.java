@@ -37,15 +37,15 @@ public final class PricingRule implements Rule {
 
     @Override
     public int priority() {
-        return 10;
+        return 2;
     }
 
     @Override
-    public int solve(final int total, final int originalPrice, Supplier<Map<String, Integer>> skusByCount) {
-        if (rulesMap.isEmpty()) return total * originalPrice;
-        if (rulesMap.size() == 1) return rulesMap.firstEntry().getValue().solve(total, originalPrice, skusByCount);
+    public int solve(SkuCalculation calculation, Supplier<Map<String, Integer>> skusByCount) {
+        if (rulesMap.isEmpty()) return calculation.total() * calculation.originalPrice();
+        if (rulesMap.size() == 1) return rulesMap.firstEntry().getValue().solve(calculation, skusByCount);
 
-        int runningTotal = total;
+        int runningTotal = calculation.total();
         int sum = 0;
         for (Map.Entry<Integer, SinglePricingRule> entry: rulesMap.entrySet()) {
             int ruleCount = entry.getKey();
@@ -53,12 +53,13 @@ public final class PricingRule implements Rule {
             if (timesTotalGoesInto < 1) continue;
 
             int totalToSolve = timesTotalGoesInto * ruleCount;
-            sum = sum + entry.getValue().solve(totalToSolve, originalPrice, skusByCount);
+            var pricingCalculation = new SkuCalculation(calculation.code(), totalToSolve, calculation.originalPrice());
+            sum = sum + entry.getValue().solve(pricingCalculation, skusByCount);
             runningTotal = runningTotal - totalToSolve;
         }
 
         if (runningTotal > 0) {
-            sum = sum + (runningTotal * originalPrice);
+            sum = sum + (runningTotal * calculation.originalPrice());
         }
 
         return sum;

@@ -1,7 +1,5 @@
 package befaster.solutions.CHK.CHK_2;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -9,20 +7,20 @@ public record SinglePricingRule(int count, int price) implements Rule {
 
     @Override
     public int priority() {
-        return 20;
+        return 3;
     }
 
     @Override
-    public int solve(final int total, final int originalPrice, Supplier<Map<String, Integer>> skusByCount) {
-        int timesPromotionIsApplied = (total / count);
+    public int solve(SkuCalculation calculation, Supplier<Map<String, Integer>> skusByCount) {
+        int timesPromotionIsApplied = (calculation.total() / count);
 
         if (timesPromotionIsApplied <= 0) {
-            return total * originalPrice;
+            return calculation.total() * calculation.originalPrice();
         }
 
         int promotional = timesPromotionIsApplied * price;
-        int remaining = total - (count * timesPromotionIsApplied);
+        int remaining = calculation.total() - (count * timesPromotionIsApplied);
 
-        return promotional + (remaining * originalPrice);
+        return promotional + (remaining * calculation.originalPrice());
     }
 }

@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import befaster.solutions.CHK.CHK_2.BoGNSelfRule;
 import befaster.solutions.CHK.CHK_2.BoGoRule;
 import befaster.solutions.CHK.CHK_2.PricingRule;
 import befaster.solutions.CHK.CHK_2.Rule;
@@ -56,7 +57,7 @@ Where:
     private static final Sku C = new Sku("C", 20);
     private static final Sku D = new Sku("D", 15);
     private static final Sku E = new Sku("E", 40, new BoGoRule(2, B));
-    private static final Sku F = new Sku("F", 10, new BoGoRule(2, "F"));
+    private static final Sku F = new Sku("F", 10, new BoGNSelfRule(1, 2, "F"));
 
     public Integer checkout(String skus) {
         if (skus == null) return -1;
@@ -102,4 +103,3 @@ Where:
         return sum;
     }
 }
-

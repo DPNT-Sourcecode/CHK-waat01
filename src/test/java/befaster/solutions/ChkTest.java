@@ -48,6 +48,9 @@ public class ChkTest {
         CheckoutSolution solution = new CheckoutSolution();
 
         int solutionFF = solution.checkout("FFF");
+        int solutionFFFF = solution.checkout("FFFF");
+        int solutionFFFFF = solution.checkout("FFFFF");
+        int solutionFFFFFF = solution.checkout("FFFFFF");
 //        int solutionAAAAAEEBAAABB = solution.checkout("AAAAAEEBAAABB");
 //        int solutionCCADDEEBBA = solution.checkout("CCADDEEBBA");
 
@@ -57,5 +60,3 @@ public class ChkTest {
         System.out.println();
     }
 }
-
-
