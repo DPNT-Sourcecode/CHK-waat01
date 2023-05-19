@@ -61,15 +61,13 @@ Where:
         final Map<String, Integer> skuCount = new HashMap<>();
 
         for (int i = 0; i < skus.length(); i++) {
-//            skuCount.computeIfAbsent(String.valueOf(skus.charAt(i)), (k) -> 1).;
             skuCount.compute(String.valueOf(skus.charAt(i)), (k,  v) -> (v == null) ? 1 : v + 1);
         }
 
-
-
-        Optional<Integer> aCount = Optional.ofNullable(skuCount.get("A"));
-        Optional<Integer> bCount = Optional.ofNullable(skuCount.get("B"));
+        Optional<Integer> aCount = Optional.ofNullable(skuCount.remove("A"));
+        Optional<Integer> bCount = Optional.ofNullable(skuCount.remove("B"));
 
         return -1;
     }
 }
+
