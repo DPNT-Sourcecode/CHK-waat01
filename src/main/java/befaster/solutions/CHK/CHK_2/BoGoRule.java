@@ -15,6 +15,11 @@ public class BoGoRule implements Rule {
         this.boGoSku = boGoSku;
     }
 
+    public BoGoRule(final int count, final String code) {
+        this.count = count;
+        this.boGoSku = new Sku(code, -1);
+    }
+
 
     @Override
     public int priority() {
@@ -36,3 +41,4 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+

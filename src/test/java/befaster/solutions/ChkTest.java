@@ -42,4 +42,19 @@ public class ChkTest {
 //        assertEquals(455, solutionAAAAAEEBAAABB);
         System.out.println();
     }
+
+    @Test
+    void next2() {
+        CheckoutSolution solution = new CheckoutSolution();
+
+        int solutionFF = solution.checkout("FF");
+//        int solutionAAAAAEEBAAABB = solution.checkout("AAAAAEEBAAABB");
+//        int solutionCCADDEEBBA = solution.checkout("CCADDEEBBA");
+
+        assertEquals(280, solutionFF);
+//        assertEquals(280, solutionCCADDEEBBA);
+//        assertEquals(455, solutionAAAAAEEBAAABB);
+        System.out.println();
+    }
 }
+
