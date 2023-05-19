@@ -45,9 +45,6 @@ Where:
 
 
     public Integer checkout(String skus) {
-
-//        if (skus == null || skus.isEmpty()) return -1;
-
         if (skus == null) return -1;
         if (skus.isEmpty()) return 0;
 
@@ -63,7 +60,6 @@ Where:
             skuCount.compute(String.valueOf(skus.charAt(i)), (k,  v) -> (v == null) ? 1 : v + 1);
         }
 
-
         AtomicReference<Integer> sum = new AtomicReference<>(0);
         skuCount.forEach((sku, count) -> {
             if (checkout.containsKey(sku)) {
@@ -78,6 +74,11 @@ Where:
 
         return -1;
     }
+
+    class Rules {
+
+    }
 }
+
 
 
