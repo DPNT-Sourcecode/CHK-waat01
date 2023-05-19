@@ -32,8 +32,9 @@ public class BoGoRule implements Rule {
                 }
             }
 
-
-//            int temp = boGoSku.caclulate(timesSkuAppears, codes);
+            int temp = boGoSku.caclulate(timesSkuAppears, codes);
+            currentSum = currentSum - (temp);
+//
 //
 //            if (timesSkuAppears > timesPromotionIsApplied) {
 //
@@ -48,6 +49,7 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 
 
