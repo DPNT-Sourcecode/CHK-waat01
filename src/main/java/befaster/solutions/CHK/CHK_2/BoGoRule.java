@@ -12,6 +12,13 @@ public class BoGoRule implements Rule {
 
     @Override
     public int solve(int total, int originalPrice) {
-        return -1;
+        int timesPromotionIsApplied = (total / count);
+
+        if (timesPromotionIsApplied <= 0) {
+            return 0;
+        }
+
+        return (total * originalPrice) + timesPromotionIsApplied * boGoValue;
     }
 }
+
