@@ -46,6 +46,12 @@ Where:
 
 
     public Integer checkout(String skus) {
+
+//        if (skus == null || skus.isEmpty()) return -1;
+
+        if (skus == null) return -1;
+        if (skus.isEmpty()) return 0;
+
         final Map<String, Integer> checkout = new HashMap<>();
         checkout.put("A", 50);
         checkout.put("B", 30);
@@ -54,6 +60,11 @@ Where:
 
         final Map<String, Integer> skuCount = new HashMap<>();
 
+        for (int i = 0; i < skus.length(); i++) {
+            skuCount.computeIfAbsent(skus)
+        }
+
+
 
         Optional<Integer> aCount = Optional.ofNullable(skuCount.get("A"));
         Optional<Integer> bCount = Optional.ofNullable(skuCount.get("B"));
@@ -61,4 +72,5 @@ Where:
         return -1;
     }
 }
+
 
