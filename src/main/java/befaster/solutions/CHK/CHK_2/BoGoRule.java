@@ -18,23 +18,24 @@ public class BoGoRule implements Rule {
         int currentSum = total * originalPrice;
         int timesPromotionIsApplied = (total / count);
 
+        // We have 2 E's and 2 B's.
+        // The promotion is applied once, meaning the promotion is invalidated moving forward for B (in this case)
         if (timesPromotionIsApplied > 0) {
             int timesSkuAppears = (int) codes.stream().filter( code -> code.equals(boGoSku.getCode())).count();
+
+            int temp = boGoSku.caclulate(timesSkuAppears, codes);
+            // The sku appears 3 times and the promotion is only applied once.
             if (timesSkuAppears > timesPromotionIsApplied) {
-                // We have 2 E's and 2 B's.
-                // The promotion is applied once, meaning the promotion is invalidated moving forward for B (in this case)
-                currentSum = currentSum - boGoSku.getCost();
+
+                currentSum = currentSum - (temp * timesPromotionIsApplied);
             }
             if (timesSkuAppears == timesPromotionIsApplied) {
-                int temp = boGoSku.caclulate(timesSkuAppears, codes);
+//                int temp = boGoSku.caclulate(timesSkuAppears, codes);
                 currentSum = (currentSum - (temp));
             }
-//            if (timesSkuAppears > 0) {
-//                int temp = boGoSku.caclulate(timesSkuAppears, codes);
-//                currentSum = (currentSum - (temp));
-//            }
         }
 
         return currentSum;
     }
 }
+

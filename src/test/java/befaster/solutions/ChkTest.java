@@ -33,7 +33,13 @@ public class ChkTest {
     void next() {
         CheckoutSolution solution = new CheckoutSolution();
 
-        int thing = solution.checkout("ABCDEABCDE");
+        int solutionABCDEABCDE = solution.checkout("ABCDEABCDE");
+        int solutionAAAAAEEBAAABB = solution.checkout("AAAAAEEBAAABB");
+//        int solutionCCADDEEBBA = solution.checkout("CCADDEEBBA");
+
+        assertEquals(280, solutionABCDEABCDE);
+//        assertEquals(280, solutionCCADDEEBBA);
         System.out.println();
     }
 }
+
