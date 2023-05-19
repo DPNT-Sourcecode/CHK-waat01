@@ -32,5 +32,3 @@ class SubPricingRule implements Rule {
         return promotional + (remaining * originalPrice);
     }
 }
-
-

@@ -107,5 +107,3 @@ Where:
         return sum.get();
     }
 }
-
-

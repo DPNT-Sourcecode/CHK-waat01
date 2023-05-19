@@ -43,5 +43,3 @@ public class ChkTest {
         System.out.println();
     }
 }
-
-
