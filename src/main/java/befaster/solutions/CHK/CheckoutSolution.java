@@ -1,5 +1,8 @@
 package befaster.solutions.CHK;
 
+import befaster.solutions.CHK.CHK_2.PricingRule;
+import befaster.solutions.CHK.CHK_2.Rule;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -57,7 +60,8 @@ Where:
 
         final Map<String, Rule> rules = new HashMap<>();
         rules.put("A", new Rule(3, 130));
-        rules.put("B", new Rule(2, 45));
+        rules.put("B", new PricingRule(2, 45));
+        rules.put("E", new Rule(2, 45));
 
         final Map<String, Integer> skuCount = new HashMap<>();
 
@@ -73,9 +77,9 @@ Where:
         skuCount.forEach((sku, count) -> {
             if (checkout.containsKey(sku)) {
                 if (rules.containsKey(sku)) {
-                    Integer priceForOne = checkout.get(sku);
-                    Rule rule = rules.get(sku);
-                    sum.set(sum.get() + rule.getCost(count, priceForOne));
+//                    Integer priceForOne = checkout.get(sku);
+//                    Rule rule = rules.get(sku);
+//                    sum.set(sum.get() + rule.getCost(count, priceForOne));
                 }
                 else {
                     sum.set(sum.get() + checkout.get(sku) * count);
@@ -86,41 +90,42 @@ Where:
         return sum.get();
     }
 
-    class Rule {
-
-        private final Integer count;
-        private final Integer price;
-
-        public Rule(final Integer count, final Integer price) {
-            this.count = count;
-            this.price = price;
-        }
-
-        public int getCost(final Integer total, final Integer originalPrice) {
-            // I need to know how many times this promotion is counted.
-            // Add the remaining number by the original price
-
-            int timesPromotionIsApplied = (total / count);
-
-            if (timesPromotionIsApplied <= 0) {
-                return total * originalPrice;
-            }
-
-            int promotional = timesPromotionIsApplied * price;
-            int remaining = total - (count * timesPromotionIsApplied);
-
-            return promotional + (remaining * originalPrice);
-        }
-    }
-
-    class SubRule {
-        private final Integer count;
-        private final Integer price;
-
-        public SubRule(final Integer count, final Integer price) {
-            this.count = count;
-            this.price = price;
-        }
-    }
+//    class Rule {
+//
+//        private final Integer count;
+//        private final Integer price;
+//
+//        public Rule(final Integer count, final Integer price) {
+//            this.count = count;
+//            this.price = price;
+//        }
+//
+//        public int getCost(final Integer total, final Integer originalPrice) {
+//            // I need to know how many times this promotion is counted.
+//            // Add the remaining number by the original price
+//
+//            int timesPromotionIsApplied = (total / count);
+//
+//            if (timesPromotionIsApplied <= 0) {
+//                return total * originalPrice;
+//            }
+//
+//            int promotional = timesPromotionIsApplied * price;
+//            int remaining = total - (count * timesPromotionIsApplied);
+//
+//            return promotional + (remaining * originalPrice);
+//        }
+//    }
+//
+//    class SubRule {
+//        private final Integer count;
+//        private final Integer price;
+//
+//        public SubRule(final Integer count, final Integer price) {
+//            this.count = count;
+//            this.price = price;
+//        }
+//    }
 }
+
 
