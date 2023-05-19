@@ -47,16 +47,14 @@ public class ChkTest {
     void next2() {
         CheckoutSolution solution = new CheckoutSolution();
 
-        int solutionFF = solution.checkout("FFF");
+        int solutionFF = solution.checkout("FF");
         int solutionFFFF = solution.checkout("FFFF");
-        int solutionFFFFF = solution.checkout("FFFFF");
         int solutionFFFFFF = solution.checkout("FFFFFF");
-//        int solutionAAAAAEEBAAABB = solution.checkout("AAAAAEEBAAABB");
-//        int solutionCCADDEEBBA = solution.checkout("CCADDEEBBA");
 
         assertEquals(20, solutionFF);
-//        assertEquals(280, solutionCCADDEEBBA);
-//        assertEquals(455, solutionAAAAAEEBAAABB);
+        assertEquals(30, solutionFFFF);
+        assertEquals(40, solutionFFFFFF);
         System.out.println();
     }
 }
+
