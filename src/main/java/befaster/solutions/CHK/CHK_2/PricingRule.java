@@ -9,23 +9,23 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public final class PricingRule implements Rule {
-    private final TreeMap<Integer, SubPricingRule> rulesMap = new TreeMap<>(Comparator.reverseOrder());
+    private final TreeMap<Integer, SinglePricingRule> rulesMap = new TreeMap<>(Comparator.reverseOrder());
 
-    public PricingRule(Collection<SubPricingRule> rules) {
-        rules.forEach(rule -> rulesMap.put(rule.getCount(), rule));
+    public PricingRule(Collection<SinglePricingRule> rules) {
+        rules.forEach(rule -> rulesMap.put(rule.count(), rule));
     }
 
     public static PricingRule singleton(final int count, final int price) {
-        return new PricingRule(Collections.singleton(new SubPricingRule(count, price)));
+        return new PricingRule(Collections.singleton(new SinglePricingRule(count, price)));
     }
 
     public static PricingRule create(final int... items) {
         if (items.length % 2 != 0) throw new IllegalArgumentException("Cannot create");
 
-        final List<SubPricingRule> rules = new ArrayList<>();
+        final List<SinglePricingRule> rules = new ArrayList<>();
 
         for (int i = 0; i < items.length; i++) {
-            rules.add(new SubPricingRule(items[i], items[i + 1]));
+            rules.add(new SinglePricingRule(items[i], items[i + 1]));
             i++;
         }
 
@@ -40,7 +40,7 @@ public final class PricingRule implements Rule {
 
         int runningTotal = total;
         int sum = 0;
-        for (Map.Entry<Integer, SubPricingRule> entry: rulesMap.entrySet()) {
+        for (Map.Entry<Integer, SinglePricingRule> entry: rulesMap.entrySet()) {
             int ruleCount = entry.getKey();
             int timesTotalGoesInto = runningTotal / ruleCount;
             if (timesTotalGoesInto < 1) continue;
@@ -57,5 +57,6 @@ public final class PricingRule implements Rule {
         return sum;
     }
 }
+
 
 

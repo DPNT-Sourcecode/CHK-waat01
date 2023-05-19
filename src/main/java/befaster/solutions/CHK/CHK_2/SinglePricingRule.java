@@ -2,23 +2,7 @@ package befaster.solutions.CHK.CHK_2;
 
 import java.util.Collection;
 
-class SubPricingRule implements Rule {
-
-    private final int count;
-    private final int price;
-
-    public SubPricingRule(final int count, final int price) {
-        this.count = count;
-        this.price = price;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public int getPrice() {
-        return price;
-    }
+public record SinglePricingRule(int count, int price) implements Rule {
 
     @Override
     public int solve(final int total, final int originalPrice, final Collection<String> codes) {
@@ -34,3 +18,4 @@ class SubPricingRule implements Rule {
         return promotional + (remaining * originalPrice);
     }
 }
+

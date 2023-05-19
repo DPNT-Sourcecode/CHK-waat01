@@ -3,6 +3,7 @@ package befaster.solutions.CHK;
 import befaster.solutions.CHK.CHK_2.BoGoRule;
 import befaster.solutions.CHK.CHK_2.PricingRule;
 import befaster.solutions.CHK.CHK_2.Rule;
+import befaster.solutions.CHK.CHK_2.SinglePricingRule;
 import befaster.solutions.CHK.CHK_2.Sku;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ Where:
 
      */
     private static final Sku A = new Sku("A", 50, PricingRule.create(5, 200, 3, 130));
-    private static final Sku B = new Sku("B", 30, PricingRule.singleton (2, 45));
+    private static final Sku B = new Sku("B", 30, new SinglePricingRule(2, 45));
     private static final Sku C = new Sku("C", 20);
     private static final Sku D = new Sku("D", 15);
     private static final Sku E = new Sku("E", 40, new BoGoRule(2, B));
@@ -107,4 +108,5 @@ Where:
         return sum.get();
     }
 }
+
 

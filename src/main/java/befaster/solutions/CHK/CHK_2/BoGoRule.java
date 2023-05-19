@@ -1,9 +1,6 @@
 package befaster.solutions.CHK.CHK_2;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class BoGoRule implements Rule {
 
@@ -34,10 +31,10 @@ public class BoGoRule implements Rule {
                 }
                 // So we have a promotion and we have the total number of codes.
                 // No we need to simulate negation of the total cost.
-                else if (bogoRule instanceof SubPricingRule) {
-                    var tempRole = (SubPricingRule) bogoRule;
-                    
-                    temp = 0;
+                else if (bogoRule instanceof SinglePricingRule) {
+                    var tempRole = (SinglePricingRule) bogoRule;
+                    var additional = totalCodesFound - timesPromotionIsApplied;
+                    temp = boGoSku.caclulate(totalCodesFound, codes) + (additional * tempRole.price());
                 }
                 else {
                     temp = boGoSku.caclulate(totalCodesFound, codes);
@@ -49,6 +46,7 @@ public class BoGoRule implements Rule {
         return currentSum;
     }
 }
+
 
 
 
