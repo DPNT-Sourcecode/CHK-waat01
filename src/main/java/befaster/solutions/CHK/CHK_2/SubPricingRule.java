@@ -10,8 +10,22 @@ class SubPricingRule implements Rule {
         this.price = price;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public int solve(int total, int originalPrice) {
-        return -1;
+        int timesPromotionIsApplied = (total / count);
+
+        if (timesPromotionIsApplied <= 0) {
+            return total * originalPrice;
+        }
+
+        int promotional = timesPromotionIsApplied * price;
+        int remaining = total - (count * timesPromotionIsApplied);
+
+        return promotional + (remaining * originalPrice);
     }
 }
+

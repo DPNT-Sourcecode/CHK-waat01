@@ -3,13 +3,19 @@ package befaster.solutions.CHK.CHK_2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public final class PricingRule implements Rule {
-    private final Collection<SubPricingRule> rules;
+//    private final Collection<SubPricingRule> rules;
+    private final Map<Integer, SubPricingRule> rulesMap = new TreeMap<>(Comparator.reverseOrder());
 
     public PricingRule(Collection<SubPricingRule> rules) {
-        this.rules = rules;
+//        this.rules = rules;
+        rules.forEach(rule -> rulesMap.put(rule.getCount(), rule));
     }
 
     public static PricingRule singleton(final int count, final int price) {
@@ -34,3 +40,4 @@ public final class PricingRule implements Rule {
         return -1;
     }
 }
+

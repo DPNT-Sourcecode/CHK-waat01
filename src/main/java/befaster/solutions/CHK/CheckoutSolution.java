@@ -79,9 +79,9 @@ Where:
         skuCount.forEach((sku, count) -> {
             if (checkout.containsKey(sku)) {
                 if (rules.containsKey(sku)) {
-//                    Integer priceForOne = checkout.get(sku);
-//                    Rule rule = rules.get(sku);
-//                    sum.set(sum.get() + rule.getCost(count, priceForOne));
+                    Integer priceForOne = checkout.get(sku);
+                    Rule rule = rules.get(sku);
+                    sum.set(sum.get() + rule.solve(count, priceForOne));
                 }
                 else {
                     sum.set(sum.get() + checkout.get(sku) * count);
@@ -129,3 +129,4 @@ Where:
 //        }
 //    }
 }
+
