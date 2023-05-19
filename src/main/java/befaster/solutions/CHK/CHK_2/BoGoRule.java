@@ -21,10 +21,11 @@ public class BoGoRule implements Rule {
         if (timesPromotionIsApplied > 0) {
             int timesSkuAppears = (int) codes.stream().filter( code -> code.equals(boGoSku.getCode())).count();
             if (timesSkuAppears > 0) {
-                currentSum = (currentSum - (timesSkuAppears * boGoSku.getCost()));
+                currentSum = (currentSum - boGoSku.getCost());
             }
         }
 
         return currentSum;
     }
 }
+

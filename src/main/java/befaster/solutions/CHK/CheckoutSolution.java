@@ -73,9 +73,11 @@ Where:
 
         final Map<String, Sku> checkout = skuList.stream().collect(Collectors.toMap(Sku::getCode, Function.identity()));
 
+        final List<String> allSkus = new ArrayList<>();
         final Map<String, Integer> skuCount = new HashMap<>();
         for (int i = 0; i < skus.length(); i++) {
             String singleSku = String.valueOf(skus.charAt(i));
+            allSkus.add(singleSku);
             if (checkout.containsKey(singleSku)) {
                 skuCount.compute(singleSku, (k,  v) -> (v == null) ? 1 : v + 1);
             }
@@ -86,10 +88,11 @@ Where:
         skuCount.forEach((code, count) -> {
             if (checkout.containsKey(code)) {
                 Sku sku = checkout.get(code);
-                sum.set(sum.get() + sku.caclulate(count));
+                sum.set(sum.get() + sku.caclulate(count, allSkus));
             }
         });
 
         return sum.get();
     }
 }
+
